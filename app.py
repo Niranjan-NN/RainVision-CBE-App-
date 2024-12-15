@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestRegressor
 
+# Debugging: Show current working directory
+st.write(f"Current working directory: {os.getcwd()}")
+
 # Page configuration
 st.set_page_config(page_title="RainVision CBE 🌧️")
 
@@ -39,6 +42,13 @@ with tab1:
     file_path = f"Sample Data/{dat.replace(' ', '_').lower()}_data.csv"
     st.write(f"Checking for file: {file_path}")  # Debugging message
     
+    # Check current working directory
+    st.write(f"Current working directory: {os.getcwd()}")
+    
+    # Check absolute path
+    absolute_path = os.path.abspath(file_path)
+    st.write(f"Absolute path: {absolute_path}")
+    
     # Check if the file exists
     if os.path.exists(file_path):
         try:
@@ -55,6 +65,7 @@ with tab1:
             try:
                 df = pd.read_csv(uploaded_file)
                 st.success("File uploaded and loaded successfully! ✅")
+                st.write(df.head())  # Display first few rows to confirm
             except Exception as e:
                 st.error(f"❌ Error loading the uploaded file: {e}")
                 st.stop()
@@ -96,19 +107,6 @@ with tab1:
         ### 🌧️ `{y_pred[0]:.2f} mm` 🌧️
         """
     )
-    
-    # Additional expanders for insights
-    with st.expander("📘 **Model Insights**"):
-        st.markdown(
-            """
-            - **Model Used:** Random Forest Regressor 🌳  
-            - **Historical Data:** Visualized in blue 📘  
-            - **Predicted Value:** Represented in red 📕  
-            """
-        )
-    
-    with st.expander("📊 **Dataset Summary**"):
-        st.dataframe(df.describe())
 
 # Tab 2: About Me
 with tab2:
@@ -117,27 +115,5 @@ with tab2:
         """
         # Hello! I'm **Niranjan NN** 👋  
         A passionate developer exploring the intersection of **AI** 🤖✨, **Data Science** 📊💡, and building tools that make a difference 🌟.
-        
-        ### About Me:
-        - 🎓 **Pursuing Bachelor of Engineering** in Information Technology at **SNS College of Engineering**, Coimbatore, India.  
-        - 💼 **Completed Internships** in **Data Science** and **Full-Stack Web Development** at **Codetech Solutions** and **Codsoft**.
-        
-        ### Why I Created RainVision CBE:
-        The **RainVision CBE 🌦️** is a web-based tool that uses **machine learning** 🤖 to forecast annual rainfall 🌦️ in 15 areas of **Coimbatore**. It utilizes the **Random Forest Regressor** 🌳 to predict rainfall for the years 2018–2030 📅, offering a user-friendly interface 🖥️ with dynamic selection and visual representations 📊 of historical and predicted data. The app aims to support decision-making in **agriculture** 🌱, **urban planning** 🏙️, and **environmental management** 🌍.
-
-        ### My Projects:
-        1. 📝 **Smart Ration** – A time slot booking app for ration shops.  
-        2. 🌏 **FieastaIndiana** – A tourism platform for hotel and guide bookings.  
-        3. 🤖 **Aara** – An AI-powered chatbot for image recognition and insights.
-        4. 🌿🕊️**InnerPeace AI**  - Your Anxiety Counselor 🎧.
-        
-        ### Interests:
-        - 🌿 AI for Social Good  
-        - 🛠️ Building impactful projects  
-        - 📊 Data Science and Visualization  
-        
-        ### Connect With Me:
-        - 🌐 **GitHub**: [github.com/niranjan](https://github.com/Niranjan-NN)  
-        - 💼 **LinkedIn**: [linkedin.com/in/niranjan_nn](https://www.linkedin.com/in/niranjan-nn/)  
         """
     )
