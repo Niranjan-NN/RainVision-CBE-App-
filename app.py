@@ -37,6 +37,7 @@ with tab1:
     
     # Define file path based on selection
     file_path = f"Sample Data/{dat.replace(' ', '_').lower()}_data.csv"
+    st.write(f"Checking for file: {file_path}")  # Debugging message
     
     # Check if the file exists
     if os.path.exists(file_path):
